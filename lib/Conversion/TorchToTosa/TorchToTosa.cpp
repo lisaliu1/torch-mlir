@@ -4181,13 +4181,13 @@ static LogicalResult getOutputTypeAndPoolingParameters(
       ceilMode);
   RankedTensorType outputTensorTy = outputTy.cast<RankedTensorType>();
   auto inH = inputTy.getShape()[2];
-  auto inW = inputTy.getShape()[3];  
+  auto inW = inputTy.getShape()[3];
   auto outH = outputTensorTy.getShape()[1];
   auto outW = outputTensorTy.getShape()[2];
   padArr[1] = (outH - 1) * strideInts[0] - inH - padArr[0] + kernelSizeInts[0];
-  padArr[1] = (padArr[1] < padArr[0])? padArr[0]: padArr[1];
+  padArr[1] = (padArr[1] < padArr[0]) ? padArr[0] : padArr[1];
   padArr[3] = (outW - 1) * strideInts[1] - inW - padArr[2] + kernelSizeInts[1];
-  padArr[3] = (padArr[3] < padArr[1])? padArr[1]: padArr[3];
+  padArr[3] = (padArr[3] < padArr[1]) ? padArr[1] : padArr[3];
   pad = rewriter.getDenseI64ArrayAttr(
       {padArr[0], padArr[1], padArr[2], padArr[3]});
   return success();
